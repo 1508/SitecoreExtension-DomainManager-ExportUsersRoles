@@ -20,3 +20,5 @@ It can be recoded to another excel generator engine or straight csv.
 * A matching import functionality.
 
 Feel free to contribute!
+
+![alt text](https://raw.github.com/1508/SitecoreExtension-DomainManager-ExportUsersRoles/master/Setup-How-To-Use.png "Functionality in use")
