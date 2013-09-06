@@ -102,8 +102,12 @@ namespace SitecoreExtension.DomainManager.ExportUsersRoles
             worksheet.Cells["D1"].Font.Bold = true;
             worksheet.Cells["E1"].Value = "Description";
             worksheet.Cells["E1"].Font.Bold = true;
-            worksheet.Cells["F1"].Value = "Roles";
+            worksheet.Cells["F1"].Value = "State";
             worksheet.Cells["F1"].Font.Bold = true;
+            worksheet.Cells["G1"].Value = "IsAdministrator";
+            worksheet.Cells["G1"].Font.Bold = true;
+            worksheet.Cells["H1"].Value = "Roles";
+            worksheet.Cells["H1"].Font.Bold = true;
             
             // start from row 2
             int i = 2;
@@ -115,7 +119,9 @@ namespace SitecoreExtension.DomainManager.ExportUsersRoles
                 worksheet.Cells["C" + i].Value = userData.Login;
                 worksheet.Cells["D" + i].Value = userData.DomainName;
                 worksheet.Cells["E" + i].Value = userData.Description;
-                worksheet.Cells["F" + i].Value = string.Join(";", userData.Roles);
+                worksheet.Cells["F" + i].Value = userData.State;
+                worksheet.Cells["G" + i].Value = userData.IsAdministrator;
+                worksheet.Cells["H" + i].Value = string.Join(";", userData.Roles);
                 i++;
             }
 
@@ -132,6 +138,8 @@ namespace SitecoreExtension.DomainManager.ExportUsersRoles
             public string DomainName { get; set; }
             public string Description { get; set; }
             public List<string> Roles { get; set; }
+            public string State { get; set; }
+            public bool IsAdministrator { get; set; }
             public string RawLine { get; set; }
 
             public UserData()
@@ -151,6 +159,8 @@ namespace SitecoreExtension.DomainManager.ExportUsersRoles
                 this.Login = user.LocalName;
                 this.DomainName = user.GetDomainName();
                 this.Description = user.Description;
+                this.State = user.Profile.State;
+                this.IsAdministrator = user.IsAdministrator;
                 foreach (Role role in user.Roles)
                 {
                     this.Roles.Add(role.LocalName);
